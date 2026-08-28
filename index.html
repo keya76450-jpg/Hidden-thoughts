@@ -168,30 +168,15 @@
             font-style: italic;
             white-space: nowrap;
             display: inline-block;
-            animation: marquee 16s linear infinite;
+            animation: marquee 20s linear infinite;
         }
         @keyframes marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
-
-        /* Music Controller Backup Toggle Link */
-        .music-fallback-control {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #ff416c;
-            cursor: pointer;
-            text-decoration: underline;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
-
-    <!-- Native Audio Element - Set to instantly jump into chorus via script -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://soundhelix.com" type="audio/mpeg">
-    </audio>
 
     <div class="card">
         <!-- Screen 0: Music Activation Gate -->
@@ -269,28 +254,38 @@
             <p class="final-text">Btw so sweet of you! You are an ice bark which crashed the titanic (Keya)! 🧊🚢💎</p>
         </div>
 
-        <!-- Right Here Waiting Lyrics Runner Box -->
+        <!-- Right Here Waiting Requested Lyrics Runner -->
         <div class="lyrics-box" id="lyricsContainer">
             <div class="lyrics-text">
-                ✨ 🎶 Wherever you go, whatever you do... I will be right here waiting for you... Whatever it takes, or how my heart breaks... I will be right here waiting for you... ❤️ ✨
+                ✨ 🎶 "Wherever you go, Whatever you do, I will be right here waiting for you. Whatever it takes, Or how my heart breaks, I will be right here waiting for you." ❤️ ✨
             </div>
         </div>
-
-        <!-- Emergency Sound Trigger Interface -->
-        <div class="music-fallback-control" onclick="forcePlayMusic()">🎵 Sound not playing? Tap here to fix!</div>
     </div>
 
     <script>
-        function startExperience() {
-            const music = document.getElementById('bgMusic');
+        let audioCtx;
+        
+        // Custom Built-In Mesmerizing Melodic Synth Engine
+        function playMelody() {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             
-            // Fast forward 62 seconds straight into the main musical chorus lines
-            music.currentTime = 62;
-            music.muted = false;
-            music.volume = 1.0;
+            // Dreamy Romantic Note Progression Array
+            const melody = [
+                261.63, 329.63, 392.00, 523.25, 392.00, 329.63,
+                293.66, 349.23, 440.00, 587.33, 440.00, 349.23,
+                329.63, 392.00, 493.88, 659.25, 493.88, 392.00,
+                349.23, 440.00, 523.25, 698.46, 523.25, 440.00
+            ];
             
-            // Standard media engagement request execution
-            music.play().catch(error => {
-                console.log("Device profile restrictions applied.");
-            });
+            let time = audioCtx.currentTime;
             
+            function scheduleNotes() {
+                melody.forEach((freq, index) => {
+                    const osc = audioCtx.createOscillator();
+                    const gainNode = audioCtx.createGain();
+                    
+                    // Soft, warm sine wave mimicking piano keystrokes
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, time + index * 0.4);
+                    
+                    // Beautiful attack and decay envelope
