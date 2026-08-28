@@ -174,15 +174,21 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+
+        /* Hidden Audio Engine Container Layout */
+        #videoPlayer {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Mesmerizing High-Fidelity Audio Streams with Automatic Backups -->
-    <audio id="bgMusic" loop>
-        <source src="https://publiccat.org" type="audio/mpeg">
-        <source src="https://soundhelix.com" type="audio/mpeg">
-    </audio>
+    <!-- Embedded YouTube API Audio Layer Engine (config to start directly at 62 seconds) -->
+    <div id="videoPlayer"></div>
 
     <div class="card">
         <!-- Screen 0: Music Activation Gate -->
@@ -268,30 +274,26 @@
         </div>
     </div>
 
+    <!-- YouTube API Engine Implementation -->
+    <script src="https://youtube.com"></script>
     <script>
-        function startExperience() {
-            const music = document.getElementById('bgMusic');
-            
-            // Unmute and force execution
-            music.muted = false;
-            music.volume = 0.8;
-            
-            // Promise engine to guarantee music activation on any mobile device
-            var playPromise = music.play();
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    console.log("Audio track initialized successfully!");
-                }).catch(error => {
-                    // Fallback try
-                    music.play();
-                });
-            }
-            
-            // Start hearts
-            setInterval(createHeart, 300);
-            
-            // Go to first slide
-            nextScreen('1');
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('videoPlayer', {
+                height: '1',
+                width: '1',
+                videoId: 'Z-X0_o2u7bY', // Beautiful Piano Instrumental of Right Here Waiting
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': 'Z-X0_o2u7bY',
+                    'start': 62 // Starts exactly at 62 seconds (The Chorus Lyrics Match!)
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
         }
 
-        function nextScreen(screenId) {
+        function onPlayerReady(event) {
