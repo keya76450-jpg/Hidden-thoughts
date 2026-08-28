@@ -3,293 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You Only... ❤️</title>
+    <title>Interactive Quiz</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        /* Mesmerizing Animated Motion Background */
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(-45deg, #ffafbd, #ffc3a0, #ff6b8b, #ff8e53);
-            background-size: 400% 400%;
-            animation: gradientMotion 15s ease infinite;
-            padding: 20px;
+            background: #ffe4e1;
             overflow: hidden;
             position: relative;
         }
 
-        @keyframes gradientMotion {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Floating Romantic Hearts Animation */
-        .heart {
+        /* Eye casting background effect */
+        .eye-background {
             position: absolute;
-            color: rgba(255, 75, 110, 0.4);
-            font-size: 20px;
-            animation: floatUp 6s linear infinite;
-            bottom: -50px;
-            z-index: 1;
-            user-select: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-        }
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-105vh) rotate(360deg);
-                opacity: 0;
-            }
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            opacity: 0.15;
+            z-index: 1;
         }
 
-        /* Glassmorphism Luxury Card Container Layout */
-        .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 40px 30px;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(255, 75, 110, 0.25);
-            text-align: center;
-            max-width: 450px;
-            width: 100%;
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .eye {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 50%;
             position: relative;
-            z-index: 10;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-        }
-        
-        /* Beautiful Premium Transitions */
-        .screen {
-            opacity: 1;
-            transform: scale(1);
-            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
+            border: 4px solid #000;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        .hidden {
-            display: none !important;
-            opacity: 0;
-            transform: scale(0.92) translateY(10px);
+
+        .pupil {
+            width: 30px;
+            height: 30px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.1s ease;
+        }
+
+        /* Main Container */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            z-index: 10;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s ease forward;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Panda Avatar */
+        .panda-box {
+            font-size: 80px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         h2 {
-            font-size: 25px;
-            color: #4a1525;
-            margin-bottom: 26px;
-            line-height: 1.4;
-            font-weight: 700;
-        }
-        p {
-            font-size: 20px;
-            color: #5c2c3a;
-            margin-bottom: 28px;
-            line-height: 1.6;
-            font-weight: 600;
-        }
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            width: 100%;
-        }
-        button {
-            padding: 15px 35px;
-            font-size: 16px;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-            color: white;
-            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
-            letter-spacing: 0.5px;
-        }
-        button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(255, 65, 108, 0.5);
-        }
-        button:active {
-            transform: translateY(-1px);
-        }
-        
-        /* Custom styled input text area */
-        textarea {
-            width: 100%;
-            height: 100px;
-            padding: 14px;
-            border-radius: 16px;
-            border: 2px solid #ffd3db;
-            background: #fff8f9;
-            margin-bottom: 22px;
-            font-size: 16px;
-            resize: none;
-            outline: none;
-            transition: all 0.3s;
-            color: #4a1525;
-        }
-        textarea:focus {
-            border-color: #ff416c;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(255, 65, 108, 0.1);
-        }
-        
-        .final-text {
-            background: linear-gradient(45deg, #ff0844 0%, #ffb199 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 25px;
-            font-weight: 800;
-            line-height: 1.5;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 24px;
         }
 
-        .start-btn {
-            font-size: 18px;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, #7f00ff 0%, #e100ff 100%);
-            box-shadow: 0 8px 25px rgba(225, 0, 255, 0.4);
-        }
-
-        /* Beautiful Moving Lyrics Banner Box */
-        .lyrics-box {
-            margin-top: 30px;
+        /* Form styling */
+        input[type="text"] {
             width: 100%;
-            overflow: hidden;
-            background: rgba(255, 235, 240, 0.8);
             padding: 12px;
-            border-radius: 15px;
-            border-left: 4px solid #ff416c;
+            border: 2px solid #ffb6c1;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            outline: none;
+            font-size: 16px;
         }
-        .lyrics-text {
-            font-size: 14px;
-            color: #ff416c;
-            font-weight: 700;
-            font-style: italic;
-            white-space: nowrap;
-            display: inline-block;
-            animation: marqueeLyrics 20s linear infinite;
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            min-height: 50px;
         }
-        @keyframes marqueeLyrics {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-yes {
+            background: #ff6b81;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background: #ff4757;
+            transform: scale(1.05);
+        }
+
+        .btn-no {
+            background: #a1a1a1;
+            color: white;
+        }
+
+        .btn-next {
+            background: #2ed573;
+            color: white;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <!-- References your own permanently uploaded file to guarantee zero blocking issues -->
-    <audio id="bgMusic" loop src="music.mp3"></audio>
+    <!-- Interactive Eye Background -->
+    <div class="eye-background">
+        <div class="eye"><div class="pupil"></div></div>
+        <div class="eye"><div class="pupil"></div></div>
+    </div>
 
     <div class="card">
-        <!-- Screen 0: Music Activation Gate -->
-        <div id="screen-0" class="screen">
-            <h2>I made a little something for you... 🔐✨</h2>
-            <p>Turn up your volume 🔊</p>
-            <div class="btn-group">
-                <button class="start-btn" onclick="startExperience()">Tap to Enter ❤️</button>
+        <!-- SCREEN 1 -->
+        <div class="screen active" id="screen1">
+            <div class="panda-box">🐼</div>
+            <h2>Are you prime minister?</h2>
+            <div class="btn-container">
+                <button class="btn-yes" onclick="goToScreen('screen2A')">Yes</button>
+                <button class="btn-no" onclick="goToScreen('screen2B')">No</button>
             </div>
         </div>
 
-        <!-- Screen 1: Are you primeminister? -->
-        <div id="screen-1" class="screen hidden">
-            <h2>Are you primeminister? 👑🧭</h2>
-            <div class="btn-group">
-                <button onclick="nextScreen('2a')">Yes 👍</button>
-                <button onclick="nextScreen('2b')">No 👎</button>
+        <!-- SCREEN 2A (If Yes) -->
+        <div class="screen" id="screen2A">
+            <div class="panda-box">Thinking... 🐼</div>
+            <h2>How much work does a prime minister do in 24 hours?</h2>
+            <input type="text" id="pmWorkInput" placeholder="Type your answer here...">
+            <button class="btn-next" onclick="goToScreen('screen3')">Next</button>
+        </div>
+
+        <!-- SCREEN 2B (If No) -->
+        <div class="screen" id="screen2B">
+            <div class="panda-box">🤔 🐼</div>
+            <h2>Why are you this much busy?</h2>
+            <button class="btn-next" onclick="goToScreen('screen3')">Next</button>
+        </div>
+
+        <!-- SCREEN 3 -->
+        <div class="screen" id="screen3">
+            <div class="panda-box">❓ 🐼</div>
+            <h2>Should I Miss you or not?</h2>
+            <div class="btn-container">
+                <button class="btn-yes" onclick="goToScreen('screen4A')">Yes</button>
+                <button class="btn-no" onclick="goToScreen('screen4B')">No</button>
             </div>
         </div>
 
-        <!-- Screen 2a: Yes Path -->
-        <div id="screen-2a" class="screen hidden">
-            <h2>How much work does a primeminister do in 24 hours? ⏳💼</h2>
-            <textarea placeholder="Tell me your busy schedule..."></textarea>
-            <div class="btn-group">
-                <button onclick="nextScreen('3')">Submit 📝</button>
-            </div>
+        <!-- SCREEN 4A (If Yes) -->
+        <div class="screen" id="screen4A">
+            <div class="panda-box">💖 🐼</div>
+            <h2>Why? Do you love me?</h2>
+            <button class="btn-next" onclick="goToScreen('screenFinal')">Next</button>
         </div>
 
-        <!-- Screen 2b: No Path -->
-        <div id="screen-2b" class="screen hidden">
-            <p>Why are you this much busy? 🤔💨</p>
-            <div class="btn-group">
-                <button onclick="nextScreen('3')">Next ➡️</button>
-            </div>
+        <!-- SCREEN 4B (If No) -->
+        <div class="screen" id="screen4B">
+            <div class="panda-box">🥺 🐼</div>
+            <h2>I knew it your answer will rude, by the way i think i should.</h2>
+            <button class="btn-next" onclick="goToScreen('screenFinal')">Next</button>
         </div>
 
-        <!-- Screen 3: Flip Screen -->
-        <div id="screen-3" class="screen hidden">
-            <h2>Should I Miss you or not? 🥺✨</h2>
-            <div class="btn-group">
-                <button onclick="nextScreen('4a')">Yes 💖</button>
-                <button onclick="nextScreen('4b')">No 🧊</button>
-            </div>
-        </div>
-
-        <!-- Screen 4a: Answered Yes to missing -->
-        <div id="screen-4a" class="screen hidden">
-            <h2>Why? Do you love me? 👀❤️</h2>
-            <div class="btn-group">
-                <button onclick="nextScreen('5')">Yes 🥰</button>
-                <button onclick="nextScreen('5')">No 🙈</button>
-            </div>
-        </div>
-
-        <!-- Screen 4b: Answered No to missing -->
-        <div id="screen-4b" class="screen hidden">
-            <p>I knew it your answer will rude, by the way i think i should. 😏🍂</p>
-            <div class="btn-group">
-                <button onclick="nextScreen('final')">Next ➡️</button>
-            </div>
-        </div>
-
-        <!-- Screen 5: January Season Question -->
-        <div id="screen-5" class="screen hidden">
-            <p>What about the month January, it will be winter season i think? ❄️☃️</p>
-            <div class="btn-group">
-                <button onclick="nextScreen('final')">Yes, true! 🏂</button>
-                <button onclick="nextScreen('final')">Maybe! 🌦️</button>
-            </div>
-        </div>
-
-        <!-- Final Screen -->
-        <div id="screen-final" class="screen hidden">
-            <p class="final-text">Btw so sweet of you! You are an ice bark which crashed the titanic (Keya)! 🧊🚢💎</p>
-        </div>
-
-        <!-- Running Lyrics Banner Section -->
-        <div class="lyrics-box" id="lyricsContainer">
-            <div class="lyrics-text">
-                🎶 Wherever you go, Whatever you do, I will be right here waiting for you... Whatever it takes, Or how my heart breaks, I will be right here waiting for you... ❤️
-            </div>
+        <!-- FINAL SCREEN -->
+        <div class="screen" id="screenFinal">
+            <div class="panda-box">💀 🐼</div>
+            <h2>Since you are rude, you should Rest in Peace</h2>
         </div>
     </div>
 
     <script>
-        function startExperience() {
-            const music = document.getElementById('bgMusic');
-            
-            // Fast forward 62 seconds straight into the beautiful main chorus section
-            music.currentTime = 62;
-            music.muted = false;
-            music.volume = 1.0;
-            
+        // Screen Navigation Logic
+        function goToScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            // Show the target screen
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // Eye-tracking animation logic
+        document.addEventListener('mousemove', (e) => {
+            const pupils = document.querySelectorAll('.pupil');
+            pupils.forEach(pupil => {
+                const eye = pupil.parentElement;
+                const rect = eye.getBoundingClientRect();
+                const eyeX = rect.left + rect.width / 2;
+                const eyeY = rect.top + rect.height / 2;
+                
+                const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+                const distance = Math.min(15, Math.hypot(e.clientX - eyeX, e.clientY - eyeY) / 10);
+                
+                const x = distance * Math.cos(angle);
+                const y = distance * Math.sin(angle);
+                
+                pupil.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
