@@ -175,20 +175,23 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Hidden Audio Engine Container Layout */
-        #videoPlayer {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
+        /* Music Controller Backup Toggle Link */
+        .music-fallback-control {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #ff416c;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <!-- Embedded YouTube API Audio Layer Engine (config to start directly at 62 seconds) -->
-    <div id="videoPlayer"></div>
+    <!-- Native Audio Element - Set to instantly jump into chorus via script -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://soundhelix.com" type="audio/mpeg">
+    </audio>
 
     <div class="card">
         <!-- Screen 0: Music Activation Gate -->
@@ -272,28 +275,22 @@
                 ✨ 🎶 Wherever you go, whatever you do... I will be right here waiting for you... Whatever it takes, or how my heart breaks... I will be right here waiting for you... ❤️ ✨
             </div>
         </div>
+
+        <!-- Emergency Sound Trigger Interface -->
+        <div class="music-fallback-control" onclick="forcePlayMusic()">🎵 Sound not playing? Tap here to fix!</div>
     </div>
 
-    <!-- YouTube API Engine Implementation -->
-    <script src="https://youtube.com"></script>
     <script>
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('videoPlayer', {
-                height: '1',
-                width: '1',
-                videoId: 'Z-X0_o2u7bY', // Beautiful Piano Instrumental of Right Here Waiting
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 'Z-X0_o2u7bY',
-                    'start': 62 // Starts exactly at 62 seconds (The Chorus Lyrics Match!)
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
+        function startExperience() {
+            const music = document.getElementById('bgMusic');
+            
+            // Fast forward 62 seconds straight into the main musical chorus lines
+            music.currentTime = 62;
+            music.muted = false;
+            music.volume = 1.0;
+            
+            // Standard media engagement request execution
+            music.play().catch(error => {
+                console.log("Device profile restrictions applied.");
             });
-        }
-
-        function onPlayerReady(event) {
+            
