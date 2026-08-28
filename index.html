@@ -121,7 +121,6 @@
             transform: translateY(-1px);
         }
         
-        /* Custom styled input text area */
         textarea {
             width: 100%;
             height: 100px;
@@ -161,7 +160,7 @@
 </head>
 <body>
 
-    <!-- Background Music Loop (Beautiful Piano / Instrumental Cover of Right Here Waiting) -->
+    <!-- Updated Direct Stream Link for Right Here Waiting (Instrumental Piano Match) -->
     <audio id="bgMusic" loop src="https://soundhelix.com"></audio>
 
     <div class="card">
@@ -242,17 +241,14 @@
     </div>
 
     <script>
-        // Start the interaction and launch background track safely
         function startExperience() {
             const music = document.getElementById('bgMusic');
             
-            // Try to smoothly play music file
-            music.play().catch(error => console.log("Audio playback waiting on active touch."));
+            // Forces mobile browsers to unblock audio streaming
+            music.muted = false;
+            music.play().catch(error => console.log("Audio load fallback initiated."));
             
-            // Create falling luxury hearts stream
             setInterval(createHeart, 300);
-            
-            // Transition directly to the first real question
             nextScreen('1');
         }
 
@@ -265,25 +261,27 @@
                 
                 setTimeout(() => {
                     currentVisible.classList.add('hidden');
-                    
                     const targetScreen = document.getElementById('screen-' + screenId);
                     targetScreen.classList.remove('hidden');
-                    
-                    void targetScreen.offsetWidth; // Refresh flow render
-                    
+                    void targetScreen.offsetWidth; 
                     targetScreen.style.opacity = '1';
                     targetScreen.style.transform = 'scale(1)';
                 }, 450);
             } else {
-                // Initial fallback load configuration setup if needed
                 const targetScreen = document.getElementById('screen-' + screenId);
                 targetScreen.classList.remove('hidden');
             }
         }
 
-        // Beautiful randomized falling canvas hearts engine
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            
-            // Choose random decorative icons
+            const heartIcons = ['❤️', '💖', '✨', '💕', '🌹'];
+            heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+            heart.style.fontSize = Math.random() * 15 + 15 + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 7000);
+        }
+    </script>
