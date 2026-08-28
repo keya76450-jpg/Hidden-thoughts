@@ -3,44 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise ✨</title>
+    <title>For You Only... ❤️</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
             padding: 20px;
+            overflow: hidden;
+            position: relative;
         }
+        
+        /* Floating Romantic Hearts Animation */
+        .heart {
+            position: absolute;
+            color: rgba(255, 75, 110, 0.4);
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+            bottom: -50px;
+            z-index: 1;
+            user-select: none;
+            pointer-events: none;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         .card {
-            background: white;
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 45px 35px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(255, 75, 110, 0.15);
             text-align: center;
-            max-width: 460px;
+            max-width: 450px;
             width: 100%;
-            min-height: 325px;
+            min-height: 340px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
-            overflow: hidden;
+            z-index: 10;
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
         
-        /* Smooth Fade Transition Styles */
+        /* Beautiful Premium Transitions */
         .screen {
             opacity: 1;
             transform: scale(1);
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -50,21 +77,22 @@
         .hidden {
             display: none !important;
             opacity: 0;
-            transform: scale(0.95);
+            transform: scale(0.92) translateY(10px);
         }
 
         h2 {
-            font-size: 24px;
-            color: #2c3e50;
-            margin-bottom: 24px;
+            font-size: 25px;
+            color: #4a1525;
+            margin-bottom: 26px;
             line-height: 1.4;
+            font-weight: 700;
         }
         p {
-            font-size: 19px;
-            color: #34495e;
+            font-size: 20px;
+            color: #5c2c3a;
             margin-bottom: 28px;
-            line-height: 1.5;
-            font-weight: 500;
+            line-height: 1.6;
+            font-weight: 600;
         }
         .btn-group {
             display: flex;
@@ -73,54 +101,81 @@
             width: 100%;
         }
         button {
-            padding: 14px 32px;
+            padding: 15px 35px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
+            letter-spacing: 0.5px;
         }
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(118, 75, 162, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 65, 108, 0.5);
         }
         button:active {
             transform: translateY(-1px);
         }
+        
+        /* Custom styled input text area */
         textarea {
             width: 100%;
             height: 100px;
             padding: 14px;
-            border-radius: 14px;
-            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            border: 2px solid #ffd3db;
+            background: #fff8f9;
             margin-bottom: 22px;
             font-size: 16px;
             resize: none;
             outline: none;
-            transition: border-color 0.2s;
+            transition: all 0.3s;
+            color: #4a1525;
         }
         textarea:focus {
-            border-color: #764ba2;
+            border-color: #ff416c;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255, 65, 108, 0.1);
         }
+        
         .final-text {
-            background: linear-gradient(45deg, #ff758c 0%, #ff7eb3 100%);
+            background: linear-gradient(45deg, #ff0844 0%, #ffb199 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 800;
             line-height: 1.5;
+        }
+
+        .start-btn {
+            font-size: 18px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #7f00ff 0%, #e100ff 100%);
+            box-shadow: 0 8px 25px rgba(225, 0, 255, 0.4);
         }
     </style>
 </head>
 <body>
 
+    <!-- Background Music Loop (Beautiful Piano / Instrumental Cover of Right Here Waiting) -->
+    <audio id="bgMusic" loop src="https://soundhelix.com"></audio>
+
     <div class="card">
+        <!-- Screen 0: Music Activation Gate -->
+        <div id="screen-0" class="screen">
+            <h2>I made a little something for you... 🔐✨</h2>
+            <p>Turn up your volume 🔊</p>
+            <div class="btn-group">
+                <button class="start-btn" onclick="startExperience()">Tap to Enter ❤️</button>
+            </div>
+        </div>
+
         <!-- Screen 1: Are you primeminister? -->
-        <div id="screen-1" class="screen">
+        <div id="screen-1" class="screen hidden">
             <h2>Are you primeminister? 👑🧭</h2>
             <div class="btn-group">
                 <button onclick="nextScreen('2a')">Yes 👍</button>
@@ -187,30 +242,48 @@
     </div>
 
     <script>
+        // Start the interaction and launch background track safely
+        function startExperience() {
+            const music = document.getElementById('bgMusic');
+            
+            // Try to smoothly play music file
+            music.play().catch(error => console.log("Audio playback waiting on active touch."));
+            
+            // Create falling luxury hearts stream
+            setInterval(createHeart, 300);
+            
+            // Transition directly to the first real question
+            nextScreen('1');
+        }
+
         function nextScreen(screenId) {
-            // Find the currently visible screen
             const currentVisible = document.querySelector('.screen:not(.hidden)');
             
             if (currentVisible) {
-                // Fade out transition animations
                 currentVisible.style.opacity = '0';
-                currentVisible.style.transform = 'scale(0.95)';
+                currentVisible.style.transform = 'scale(0.92) translateY(-10px)';
                 
                 setTimeout(() => {
                     currentVisible.classList.add('hidden');
                     
-                    // Setup and fade in the target screen
                     const targetScreen = document.getElementById('screen-' + screenId);
                     targetScreen.classList.remove('hidden');
                     
-                    // Trigger reflow to restart css animation properties smoothly
-                    void targetScreen.offsetWidth; 
+                    void targetScreen.offsetWidth; // Refresh flow render
                     
                     targetScreen.style.opacity = '1';
                     targetScreen.style.transform = 'scale(1)';
-                }, 400); // Matches the 0.4s CSS transition time exactly
+                }, 450);
+            } else {
+                // Initial fallback load configuration setup if needed
+                const targetScreen = document.getElementById('screen-' + screenId);
+                targetScreen.classList.remove('hidden');
             }
         }
-    </script>
-</body>
-</html>
+
+        // Beautiful randomized falling canvas hearts engine
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Choose random decorative icons
